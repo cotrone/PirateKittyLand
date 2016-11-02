@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Cat1Script : MonoBehaviour
 {
@@ -22,13 +23,22 @@ public class Cat1Script : MonoBehaviour
     // Animator to call to change animations
     public Animator anim;
     // Current speed of the cat
-    public float speed;
+    public float speed = 2;
     // Transform to handle changing cat directions
     public Transform myTrans;
+
+    //Ranges of x and y for starting cat positions
+    public float MinX = -560;
+    public float MaxX = 560;
+    public float MinY = -330;
+    public float MaxY = 330;
 
 
     // If the cat is alive or dead
     bool alive;
+
+    // Time of last click
+    public float lastClickTime;
 
     // Use this for initialization
     void Start()
@@ -38,14 +48,20 @@ public class Cat1Script : MonoBehaviour
         myTrans = this.transform;
         anim = gameObject.GetComponent<Animator>();
         alive = true; // Cat defaults to alive
+        Vector2 t = myTrans.position;
+        myTrans.position = new Vector2(Random.Range(MinX, MaxX), t.y);
     }
 
     // Update is called once per frame
     void Update()
     {
         // Update the cat speed
-        // direction is checked through in the update
-        transform.Translate(new Vector3(speed, 0, 0) * 120 * Time.deltaTime);
+        if (alive)
+        {
+            // direction is checked through in the update
+            transform.Translate(new Vector3(speed, 0, 0) * 120 * Time.deltaTime);
+        }
+
     }
 
     // Handle clicking on the cat
@@ -98,7 +114,7 @@ public class Cat1Script : MonoBehaviour
     IEnumerator SlowDown()
     {
         float slowDownIncrement = speed / 10;
-        for(int i = 0; i < 10; i++)
+        for (int i = 0; i < 10; i++)
         {
             speed -= slowDownIncrement;
             yield return new WaitForSeconds(0.1f);

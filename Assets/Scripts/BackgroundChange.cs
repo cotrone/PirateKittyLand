@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BackgroundChange : MonoBehaviour {
+public class BackgroundChange : MonoBehaviour
+{
 
-    private const int bgChangeTimeSeconds = 5 * 60;
+    private const int bgChangeTimeSeconds = 10;
 
     IEnumerator BGChangeRoutine()
     {
@@ -15,10 +16,11 @@ public class BackgroundChange : MonoBehaviour {
         BGChangeRoutine();
 
     }
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     void Start()
     {

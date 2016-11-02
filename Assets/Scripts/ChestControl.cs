@@ -41,7 +41,17 @@ public class ChestControl : MonoBehaviour
 
         // Start the coroutine to move to the homescreen
         moveToHomeScreen = StartCoroutine(backToHomeScreen());
+        randomizePosition(bl);
+        randomizePosition(br);
+        randomizePosition(tr);
+        randomizePosition(tl);
+    }
 
+    void randomizePosition(Component c)
+    {
+        Vector2 v = c.transform.position;
+
+        c.transform.position = new Vector2(v.x + Random.Range(-120,120), v.y + Random.Range(-40,40));
     }
 
     // Corouting to handle moving back to the home screen
